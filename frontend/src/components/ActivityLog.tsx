@@ -22,8 +22,11 @@ const ActivityLog = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [activityData, setActivityData] = useState<any[]>([]);
 
+    const urlRemote = 'http://instatus-server-env.eba-g626bmvy.us-east-1.elasticbeanstalk.com';
+    const urlLocal = 'http://127.0.0.1:8000';
+
     const { data, error, mutate } = useSWR(
-        `http://instatus-server-env.eba-g626bmvy.us-east-1.elasticbeanstalk.com/events?pageNumber=${page}&searchTerm=${searchTerm}`,
+        `${urlRemote}/events?pageNumber=${page}&searchTerm=${searchTerm}`,
         fetcher
     );
 
@@ -36,7 +39,7 @@ const ActivityLog = () => {
         }, [data]);
 
         useEffect(() => {
-            const socket = io('http://instatus-server-env.eba-g626bmvy.us-east-1.elasticbeanstalk.com/');
+            const socket = io(`${urlRemote}`);
 
             socket.on('newEvent', (newEvent: any) => {
                 setActivityData(prevData => {

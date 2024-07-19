@@ -26,10 +26,10 @@ const ActivityLogItem = (obj: any) => {
                 <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${colorClass} text-white flex items-center justify-center mr-2 md:mr-3`}>
                     {initials}
                 </div>
-                <span className="truncate">{target_name}</span>
+                <span className="truncate text-gray-500">{target_name}</span>
             </td>
             <td className="p-2 md:p-4 text-xs md:text-sm font-semibold text-gray-800">
-                <span className="truncate">{action.name}</span>
+                <span className="truncate text-gray-500">{action.name}</span>
             </td>
             <td className="p-2 md:p-4 text-gray-500 text-xs md:text-sm font-semibold whitespace-nowrap">{newDate}</td>
         </tr>

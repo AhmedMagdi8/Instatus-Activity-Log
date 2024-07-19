@@ -1,14 +1,10 @@
-Sure! Here's the README content formatted using `#` and links, ready to be copied into your README file:
-
----
-
 # Instatus-Activity-Log
 
 Instatus Task
 
 ## Description
 
-Instatus-Activity-Log is a web application designed to log and display activity statuses. The app is deployed on AWS Elastic Beanstalk and S3.
+Instatus-Activity-Log is a web application designed to log and display activity statuses.
 
 ## Deployment
 
@@ -27,14 +23,18 @@ The application is accessible at the following URL:
 
 - React
 - TypeScript
+- TailwindCSS
+- SWR
 
 ### Backend
 
 - Node.js
 - Express.js
+- Prisma - PostgreSQL
 - Socket.IO
 
 ### Deployment
 
 - AWS Elastic Beanstalk
 - AWS S3
+- Neon for Database
