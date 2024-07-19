@@ -1,4 +1,6 @@
 import express from 'express';
+import { Server } from 'socket.io';
+
 import InstaLog from '../library/InstaLog';
 import GenericError from '../utilities/genericError';
 import EventType from '../types/Event';
@@ -6,10 +8,13 @@ import EventType from '../types/Event';
 export default class Event {
     public path = "/events";
     public router = express.Router();
+    private io: Server;
+
     private PAGE_SIZE = 10;
 
-    constructor() {
+    constructor(io: Server) {
         this.initRoutes();
+        this.io = io;
     }   
 
     initRoutes() {
@@ -23,14 +28,12 @@ export default class Event {
         next: Function
     ) {
         try {
-
-
             const instaLog = new InstaLog("my secret");
 
             let events: any;
 
             let { searchTerm, pageNumber } = req.query;
-            console.log(searchTerm);
+            console.log(req.query);
             
             if(searchTerm) {
                 events = await instaLog.searchEvents({searchTerm, pageNumber})
@@ -55,7 +58,7 @@ export default class Event {
             
             const instaLog = new InstaLog("my secret");
             
-            console.log(req.body);
+            // console.log(req.body);
             const {
                 object,
                 actor_id,
@@ -106,6 +109,9 @@ export default class Event {
     
             const event_created = await instaLog.createEvent(event);
     
+            // Emit the event to all connected clients
+            this.io.emit('newEvent', event);
+
             return res.status(201).json({
                 message: 'Event created successfully',
                 event_created

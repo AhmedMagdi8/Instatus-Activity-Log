@@ -32,6 +32,9 @@ export default class InstaLog {
                     action: true,
                     metadata: true
                 },
+                orderBy: {
+                    occurred_at: 'desc',
+                },                
                 skip: this.PAGE_SIZE * ((!pageNumber || pageNumber < 1 ? 1 : pageNumber) - 1),
                 take: this.PAGE_SIZE
             });
@@ -72,6 +75,9 @@ export default class InstaLog {
                     },
                 ],
             },
+            orderBy: {
+                occurred_at: 'desc',
+            },    
             include: {
                 action: true, // To include related action details
                 metadata: true, // To include related metadata details

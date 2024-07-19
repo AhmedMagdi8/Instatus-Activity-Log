@@ -20,6 +20,6 @@ code {
     monospace;
 }
 
-h1 {
-    color: red;
+.span-font {
+    @apply font-semibold
 }

@@ -59,7 +59,7 @@ export default async function main() {
       group: 'example.com',
       actionId: eventAction2.id,
       target_id: 'user_XYZ456ABC789',
-      target_name: 'john@example.com',
+      target_name: 'ahmed@instatus.com',
       location: '192.168.1.1',
       occurred_at: new Date(),
       metadataId: metadata2.id

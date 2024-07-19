@@ -15,6 +15,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1",
     "react-scripts": "5.0.1",
+    "socket.io-client": "^4.7.5",
+    "swr": "^2.2.5",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -43,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@types/json2csv": "^5.0.7",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.4"

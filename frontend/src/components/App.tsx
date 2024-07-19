@@ -1,10 +1,12 @@
 import React from 'react';
 import Router  from '../Router/Router'
+import ActivityLog from './ActivityLog';
 
 function App() {
   return (
     <>
-        <Router />
+        {/* <Router /> */}
+        <ActivityLog />
     </>
   );
 }

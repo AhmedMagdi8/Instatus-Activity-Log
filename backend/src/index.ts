@@ -1,5 +1,9 @@
 import express, { Application } from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import EventRouter from './controllers/events.controller';
 
@@ -10,13 +14,25 @@ dotenv.config();
 class App {
     public port: number | string;
     public app: Application;
-
+    public server: http.Server;
+    public io: Server;
 
     constructor() {
         this.app = express();
+        this.app.use(cors());
         this.app.use(express.json());
         this.port = process.env.PORT || 8080;
+        this.server = http.createServer(this.app);
+        // Initialize Socket.IO server
+        this.io = new Server(this.server, {
+            cors: {
+                origin: "*",
+                methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+        }});
+        
         this.initializeRoutes();
+        this.initializeSocket();
+
         this.app.use(
             (
               error: any,
@@ -41,15 +57,25 @@ class App {
             res.send('Hello World!')
         });
 
-        const eventRouter = new EventRouter();
+        const eventRouter = new EventRouter(this.io);
         this.app.use('/', eventRouter.router);
 
     }
 
+    private initializeSocket() {
+        this.io.on('connection', (socket) => {
+            console.log('A user connected');
+
+            socket.on('disconnect', () => {
+                console.log('User disconnected');
+            });
+        });
+    }
+
     public listen() {
-        this.app.listen(this.port, () => {
+        this.server.listen(this.port, () => {
             console.log(`App is running on port ${this.port}`);
-        })
+        });
     }
 }
 
