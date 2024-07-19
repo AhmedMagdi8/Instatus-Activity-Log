@@ -23,7 +23,7 @@ const ActivityLog = () => {
     const [activityData, setActivityData] = useState<any[]>([]);
 
     const { data, error, mutate } = useSWR(
-        `http://127.0.0.1:8000/events?pageNumber=${page}&searchTerm=${searchTerm}`,
+        `http://instatus-server-env.eba-g626bmvy.us-east-1.elasticbeanstalk.com/events?pageNumber=${page}&searchTerm=${searchTerm}`,
         fetcher
     );
 
@@ -36,7 +36,7 @@ const ActivityLog = () => {
         }, [data]);
 
         useEffect(() => {
-            const socket = io('http://127.0.0.1:8000');
+            const socket = io('http://instatus-server-env.eba-g626bmvy.us-east-1.elasticbeanstalk.com/');
 
             socket.on('newEvent', (newEvent: any) => {
                 setActivityData(prevData => {

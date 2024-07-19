@@ -9,7 +9,7 @@ const startCronJob = () => {
   };
 
   // Schedule the task to run every 1 minutes
-  cron.schedule('*/1 * * * *', task);
+  cron.schedule('*/15 * * * *', task);
 };
 
 export default startCronJob;

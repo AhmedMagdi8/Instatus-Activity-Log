@@ -1,5 +1,7 @@
 import express, { Application } from 'express';
 import http from 'http';
+import helmet from 'helmet';
+import compression from 'compression';
 import { Server } from 'socket.io';
 
 import dotenv from 'dotenv';
@@ -20,6 +22,8 @@ class App {
     constructor() {
         this.app = express();
         this.app.use(cors());
+        this.app.use(helmet());
+        this.app.use(compression());
         this.app.use(express.json());
         this.port = process.env.PORT || 8080;
         this.server = http.createServer(this.app);
@@ -29,7 +33,7 @@ class App {
                 origin: "*",
                 methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
         }});
-        
+
         this.initializeRoutes();
         this.initializeSocket();
 
